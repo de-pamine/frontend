@@ -14,6 +14,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool isPause = true;
+  double bezier = 130;
+  void setBezier(double val) {
+    setState(() {
+      bezier = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,25 +47,29 @@ class _MyAppState extends State<MyApp> {
                   // ),
                   Expanded(
                     child: CustomPaint(
-                      painter: MyPainter(),
+                      painter: MyPainter(bezier: bezier),
                     ),
                   ),
                 ],
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    isPause = !isPause;
+                  });
+                },
                 child: Container(
                   width: 100,
                   height: 100,
                   color: Colors.red,
                 ),
               ),
-              const Positioned(
+              Positioned(
                 left: 140,
                 top: 540,
                 child: Align(
                   alignment: Alignment.center,
-                  child: AnimationWidget(),
+                  child: AnimationWidget(isPause: isPause, setBezier: setBezier),
                 ),
               ),
             ],

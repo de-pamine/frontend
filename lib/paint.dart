@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyPainter extends CustomPainter {
+  const MyPainter({required this.bezier});
+  final double bezier;
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
@@ -12,9 +14,9 @@ class MyPainter extends CustomPainter {
       ..moveTo(0, 500 + 50)
       ..quadraticBezierTo(
         240,
-        500 + 180,
+        500 + 50 + bezier,
         411,
-        500 + 200,
+        500 + 50 + bezier + 20,
       );
 
     final path2 = Path()
