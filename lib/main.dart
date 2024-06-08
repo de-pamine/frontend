@@ -1,12 +1,19 @@
+import 'package:depamine/animation.dart';
+import 'package:depamine/paint.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,63 +23,48 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: Column(
-          children: [
-            // Expanded(
-            //   child: Container(
-            //     height: 500,
-            //     color: Colors.blueGrey,
-            //   ),
-            // ),
-            Expanded(
-              child: CustomPaint(
-                painter: MyPainter(),
+        body: Container(
+          width: MediaQuery.of(context).size.width * 1,
+          height: MediaQuery.of(context).size.height * 1,
+          color: Colors.lightBlue.shade50,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  // Expanded(
+                  //   child: Container(
+                  //     height: 500,
+                  //     color: Colors.blueGrey,
+                  //   ),
+                  // ),
+                  Expanded(
+                    child: CustomPaint(
+                      painter: MyPainter(),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
+              TextButton(
+                onPressed: () {},
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  color: Colors.red,
+                ),
+              ),
+              const Positioned(
+                left: 140,
+                top: 540,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: AnimationWidget(),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
-  }
-}
-
-class MyPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..strokeWidth = 3
-      ..color = Colors.blue
-      ..style = PaintingStyle.fill;
-
-    final path1 = Path()
-      ..moveTo(0, 500 + 50)
-      ..quadraticBezierTo(
-        240,
-        500 + 180,
-        411,
-        500 + 200,
-      );
-
-    final path2 = Path()
-      ..addPath(
-        path1,
-        const Offset(0, 0),
-      )
-      ..lineTo(411, 0)
-      ..lineTo(0, 0)
-      ..lineTo(0, 500 + 180);
-
-    canvas.drawPath(path2, paint);
-
-    final paint2 = Paint()
-      ..color = Colors.grey
-      ..style = PaintingStyle.fill;
-    canvas.drawCircle(const Offset(200, 500 + 100), 60, paint2);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
   }
 }
 
