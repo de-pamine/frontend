@@ -16,7 +16,7 @@ class MyPainter extends CustomPainter {
         240,
         500 + 50 + bezier,
         411,
-        500 + 50 + bezier + 20,
+        500 + 50 + (150 * bezier / 130),
       );
 
     final path2 = Path()
@@ -48,3 +48,10 @@ class MyPainter extends CustomPainter {
     return true;
   }
 }
+
+      // (
+      //   240,
+      //   500 + 50 + bezier,
+      //   411,
+      //   500 + 50 + bezier + 20,
+      // )

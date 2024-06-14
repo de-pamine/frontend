@@ -1,10 +1,9 @@
+import 'package:depamine/paint.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' show pi;
 
 class AnimationWidget extends StatefulWidget {
-  const AnimationWidget({super.key, required this.isPause, required this.setBezier});
-  final bool isPause;
-  final Function setBezier;
+  const AnimationWidget({super.key});
 
   @override
   State<AnimationWidget> createState() => _AnimationWidgetState();
@@ -15,8 +14,9 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
   late Animation<double> rollingAnimation;
   late AnimationController stopRollingController;
   late Animation<double> stopRollingAnimation;
+  late Animation<double> stopRollingCurve;
 
-  bool tmp = false;
+  bool isPause = true;
 
   @override
   void initState() {
@@ -29,28 +29,10 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
 
     stopRollingController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 2000),
     );
-    stopRollingAnimation = Tween<double>(begin: 130, end: 0).animate(stopRollingController);
-  }
-
-  @override
-  void didUpdateWidget(covariant AnimationWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.isPause) {
-      rollingController.stop();
-      setState(() {
-        tmp = true;
-        //widget.setBezier(stopRollingAnimation.value);
-      });
-      stopRollingController.forward();
-    } else {
-      rollingController.repeat();
-      tmp = false;
-    }
-    // if (tmp) {
-    //   widget.setBezier(stopRollingAnimation.value);
-    // }
+    stopRollingCurve = CurvedAnimation(parent: stopRollingController, curve: Curves.ease);
+    stopRollingAnimation = Tween<double>(begin: 120, end: 0).animate(stopRollingCurve);
   }
 
   @override
@@ -62,14 +44,63 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: tmp ? stopRollingController : rollingController,
+      animation: isPause ? stopRollingController : rollingController,
       builder: (BuildContext context, Widget? widget) {
-        return Transform.rotate(
-          angle: rollingAnimation.value,
-          child: Container(
-            color: Colors.grey,
-            width: 120,
-            height: 120,
+        return Container(
+          width: MediaQuery.of(context).size.width * 1,
+          height: MediaQuery.of(context).size.height * 1,
+          color: Colors.lightBlue.shade50,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  // Expanded(
+                  //   child: Container(
+                  //     height: 500,
+                  //     color: Colors.blueGrey,
+                  //   ),
+                  // ),
+                  Expanded(
+                    child: CustomPaint(
+                      painter: MyPainter(bezier: stopRollingAnimation.value),
+                    ),
+                  ),
+                ],
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    isPause = !isPause;
+                    if (isPause) {
+                      rollingController.stop();
+                      stopRollingController.forward();
+                    } else {
+                      rollingController.repeat();
+                    }
+                  });
+                },
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  color: Colors.red,
+                ),
+              ),
+              Positioned(
+                left: 140,
+                top: 540,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Transform.rotate(
+                    angle: rollingAnimation.value,
+                    child: Container(
+                      color: Colors.grey,
+                      width: 120,
+                      height: 120,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },
