@@ -13,10 +13,10 @@ class MyPainter extends CustomPainter {
     final path1 = Path()
       ..moveTo(0, 500 + 50)
       ..quadraticBezierTo(
-        240,
-        500 + 50 + bezier,
+        200,
+        500 + 50 + (110 * bezier / 120),
         411,
-        500 + 50 + (150 * bezier / 130),
+        500 + 50 + (150 * bezier / 120),
       );
 
     final path2 = Path()
@@ -55,3 +55,10 @@ class MyPainter extends CustomPainter {
       //   411,
       //   500 + 50 + bezier + 20,
       // )
+      
+      //..moveTo(0, 500 + 50 + (150 * (120 - bezier) / 120))
+      //..quadraticBezierTo(
+      //  200,
+      //  500 + 50 + (-40 * bezier / 120) + 150,
+      //  411,
+      //  500 + 50 + 150,

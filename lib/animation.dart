@@ -23,7 +23,7 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
     super.initState();
     rollingController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 1000),
     );
     rollingAnimation = Tween<double>(begin: 0.0, end: pi * 2).animate(rollingController);
 
@@ -31,7 +31,7 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
       vsync: this,
       duration: const Duration(milliseconds: 2000),
     );
-    stopRollingCurve = CurvedAnimation(parent: stopRollingController, curve: Curves.ease);
+    stopRollingCurve = CurvedAnimation(parent: stopRollingController, curve: Curves.decelerate);
     stopRollingAnimation = Tween<double>(begin: 120, end: 0).animate(stopRollingCurve);
   }
 
@@ -91,7 +91,7 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
                 child: Align(
                   alignment: Alignment.center,
                   child: Transform.rotate(
-                    angle: rollingAnimation.value,
+                    angle: isPause ? getAngle() : rollingAnimation.value,
                     child: Container(
                       color: Colors.grey,
                       width: 120,
@@ -105,5 +105,12 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
         );
       },
     );
+  }
+
+  double getAngle() {
+    final oldValue = rollingAnimation.value;
+    final newValue = oldValue > pi ? 4 * pi - oldValue : 2 * pi - oldValue;
+    newValue;
+    return oldValue + (120 - stopRollingAnimation.value) * newValue / 120;
   }
 }
