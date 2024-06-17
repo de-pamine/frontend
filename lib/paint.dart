@@ -9,14 +9,21 @@ class MyPainter extends CustomPainter {
       ..strokeWidth = 3
       ..color = Colors.blue
       ..style = PaintingStyle.fill;
+    //..maskFilter = const MaskFilter.blur(BlurStyle.solid, 20);
+
+    final paint2 = Paint()
+      ..strokeWidth = 3
+      ..color = Colors.lightBlue.shade50
+      ..style = PaintingStyle.fill
+      ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 20);
 
     final path1 = Path()
-      ..moveTo(0, 500 + 50)
+      ..moveTo(0, 500 + 50 + (110 * (120 - bezier) / 120))
       ..quadraticBezierTo(
         200,
-        500 + 50 + (110 * bezier / 120),
+        500 + 50 + 110,
         411,
-        500 + 50 + (150 * bezier / 120),
+        500 + 50 + (bezier / 3) + 110,
       );
 
     final path2 = Path()
@@ -28,7 +35,23 @@ class MyPainter extends CustomPainter {
       ..lineTo(0, 0)
       ..lineTo(0, 500 + 180);
 
+    final path3 = Path()
+      ..addPath(
+        path1,
+        const Offset(0, 0),
+      )
+      ..lineTo(411, 866)
+      ..lineTo(0, 866)
+      ..lineTo(0, 500 + 180);
+
     canvas.drawPath(path2, paint);
+
+    canvas.drawPath(path3, paint2);
+
+    //canvas.save();
+    //canvas.translate(2.5, 2.5);
+    //canvas.drawShadow(path1, Colors.black, 10, false);
+    //canvas.restore();
 
     // final paint2 = Paint()
     //   ..color = Colors.grey
@@ -55,10 +78,18 @@ class MyPainter extends CustomPainter {
       //   411,
       //   500 + 50 + bezier + 20,
       // )
-      
+
       //..moveTo(0, 500 + 50 + (150 * (120 - bezier) / 120))
       //..quadraticBezierTo(
       //  200,
       //  500 + 50 + (-40 * bezier / 120) + 150,
       //  411,
       //  500 + 50 + 150,
+
+      // ..moveTo(0, 500 + 50)
+      // ..quadraticBezierTo(
+      //   200,
+      //   500 + 50 + (110 * bezier / 120),
+      //   411,
+      //   500 + 50 + (150 * bezier / 120),
+      // );

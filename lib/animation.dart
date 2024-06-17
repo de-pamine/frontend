@@ -46,28 +46,21 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
     return AnimatedBuilder(
       animation: isPause ? stopRollingController : rollingController,
       builder: (BuildContext context, Widget? widget) {
-        return Container(
-          width: MediaQuery.of(context).size.width * 1,
-          height: MediaQuery.of(context).size.height * 1,
-          color: Colors.lightBlue.shade50,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  // Expanded(
-                  //   child: Container(
-                  //     height: 500,
-                  //     color: Colors.blueGrey,
-                  //   ),
-                  // ),
-                  Expanded(
-                    child: CustomPaint(
-                      painter: MyPainter(bezier: stopRollingAnimation.value),
-                    ),
+        return Stack(
+          children: [
+            Column(
+              children: [
+                Expanded(
+                  child: CustomPaint(
+                    painter: MyPainter(bezier: stopRollingAnimation.value),
                   ),
-                ],
-              ),
-              TextButton(
+                ),
+              ],
+            ),
+            Positioned(
+              left: 340,
+              top: 800,
+              child: TextButton(
                 onPressed: () {
                   setState(() {
                     isPause = !isPause;
@@ -80,28 +73,25 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
                   });
                 },
                 child: Container(
-                  width: 100,
-                  height: 100,
+                  width: 50,
+                  height: 50,
                   color: Colors.red,
                 ),
               ),
-              Positioned(
-                left: 140,
-                top: 540,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Transform.rotate(
-                    angle: isPause ? getAngle() : rollingAnimation.value,
-                    child: Container(
-                      color: Colors.grey,
-                      width: 120,
-                      height: 120,
-                    ),
-                  ),
+            ),
+            Positioned(
+              left: 140,
+              top: 600, //540
+              child: Transform.rotate(
+                angle: isPause ? getAngle() : rollingAnimation.value,
+                child: Container(
+                  color: Colors.grey,
+                  width: 120,
+                  height: 120,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
