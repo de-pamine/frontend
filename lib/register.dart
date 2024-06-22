@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Padding(
                 padding: EdgeInsets.only(top: 100),
                 child: Text(
-                  "Depamine",
+                  "회원가입",
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w600,
@@ -56,7 +54,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 30),
+              SizedBox(
+                width: 300,
+                height: 60,
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(),
+                    hintText: "비밀번호 확인",
+                  ),
+                  obscureText: true,
+                ),
+              ),
+              const SizedBox(height: 30),
+              SizedBox(
+                width: 300,
+                height: 60,
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    enabledBorder: OutlineInputBorder(),
+                    border: OutlineInputBorder(),
+                    hintText: "닉네임",
+                  ),
+                ),
+              ),
               SizedBox(
                 width: 300,
                 child: Align(
@@ -64,20 +86,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: IconButton(
                     onPressed: () {},
                     icon: const Icon(Icons.arrow_circle_right_outlined),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
-              SizedBox(
-                width: 300,
-                height: 40,
-                child: TextButton(
-                  onPressed: () {
-                    context.go("/register");
-                  },
-                  child: const Text(
-                    "회원가입",
-                    textAlign: TextAlign.end,
                   ),
                 ),
               ),

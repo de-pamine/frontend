@@ -1,5 +1,6 @@
 import 'package:depamine/animation.dart';
 import 'package:depamine/login.dart';
+import 'package:depamine/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -58,6 +59,17 @@ class _MyAppState extends State<MyApp> {
             pageBuilder: (context, state) => CustomTransitionPage(
               key: state.pageKey,
               child: const LoginScreen(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              ),
+            ),
+          ),
+          GoRoute(
+            path: "/register",
+            pageBuilder: (context, state) => CustomTransitionPage(
+              key: state.pageKey,
+              child: const RegisterScreen(),
               transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
                 opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
