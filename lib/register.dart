@@ -34,6 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: 300,
                 height: 60,
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     enabledBorder: OutlineInputBorder(),
                     border: OutlineInputBorder(),
@@ -46,6 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: 300,
                 height: 60,
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     enabledBorder: OutlineInputBorder(),
@@ -59,6 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: 300,
                 height: 60,
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     enabledBorder: OutlineInputBorder(),

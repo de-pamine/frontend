@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -36,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 300,
                 height: 60,
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     enabledBorder: OutlineInputBorder(),
                     border: OutlineInputBorder(),
