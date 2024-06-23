@@ -1,9 +1,7 @@
-/*
-
-import 'package:depamine/login.dart';
-import 'package:depamine/main.dart';
-import 'package:depamine/register.dart';
+import 'package:depamine/view/login_screen.dart';
+import 'package:depamine/view/register_screen.dart';
 import 'package:depamine/view/home_screen.dart';
+import 'package:depamine/widget/navigation_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -61,4 +59,24 @@ final GoRouter appRouter = GoRouter(
   ],
 );
 
-*/
+class Shell extends StatelessWidget {
+  const Shell({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          child,
+          const Positioned(
+            left: 20,
+            top: 20,
+            child: NavigationButtonGrid(),
+          ),
+        ],
+      ),
+    );
+  }
+}

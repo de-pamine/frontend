@@ -38,6 +38,7 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
   @override
   void dispose() {
     rollingController.dispose();
+    stopRollingController.dispose();
     super.dispose();
   }
 

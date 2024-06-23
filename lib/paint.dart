@@ -9,7 +9,6 @@ class MyPainter extends CustomPainter {
       ..strokeWidth = 3
       ..color = Colors.blue
       ..style = PaintingStyle.fill;
-    //..maskFilter = const MaskFilter.blur(BlurStyle.solid, 20);
 
     final paint2 = Paint()
       ..strokeWidth = 3
@@ -52,18 +51,6 @@ class MyPainter extends CustomPainter {
     //canvas.translate(2.5, 2.5);
     //canvas.drawShadow(path1, Colors.black, 10, false);
     //canvas.restore();
-
-    // final paint2 = Paint()
-    //   ..color = Colors.grey
-    //   ..style = PaintingStyle.fill;
-    // canvas.drawRect(
-    //   Rect.fromCenter(
-    //     center: const Offset(200, 500 + 100),
-    //     width: 120,
-    //     height: 120,
-    //   ),
-    //   paint2,
-    // );
   }
 
   @override
