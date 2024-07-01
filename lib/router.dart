@@ -12,17 +12,13 @@ final GoRouter appRouter = GoRouter(
   navigatorKey: rootNavKey,
   initialLocation: "/",
   routes: [
-    // GoRoute(
-    //   path: "/",
-    //   pageBuilder: (context, state) => const NoTransitionPage(child: HomeScreen()),
-    // ),
-    //start
     ShellRoute(
       navigatorKey: shellNavKey,
       routes: [
         GoRoute(
           path: "/",
           pageBuilder: (context, state) => CustomTransitionPage(
+            transitionDuration: const Duration(milliseconds: 800),
             key: state.pageKey,
             child: const HomeScreen(),
             transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
@@ -34,6 +30,7 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: "/login",
           pageBuilder: (context, state) => CustomTransitionPage(
+            transitionDuration: const Duration(milliseconds: 800),
             key: state.pageKey,
             child: const LoginScreen(),
             transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(

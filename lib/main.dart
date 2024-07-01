@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:depamine/router.dart';
-
-final GlobalKey<NavigatorState> rootNavKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> shellNavKey = GlobalKey<NavigatorState>();
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
+  void init() {
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual,
       overlays: [
@@ -30,6 +21,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    init();
     return MaterialApp.router(
       routerConfig: appRouter,
       title: 'Home',

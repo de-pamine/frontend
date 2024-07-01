@@ -82,13 +82,11 @@ class _AnimationWidgetState extends State<AnimationWidget> with TickerProviderSt
             ),
             Positioned(
               left: 140,
-              top: 600, //540
+              top: 600,
               child: Transform.rotate(
                 angle: isPause ? getAngle() : rollingAnimation.value,
-                child: Container(
-                  color: Colors.grey,
-                  width: 120,
-                  height: 120,
+                child: const FlutterLogo(
+                  size: 120,
                 ),
               ),
             ),
